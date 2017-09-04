@@ -7,28 +7,30 @@ require_once('inc/settings.php');
 
 // подключим стили и скрипт
 function tc_load_resource() {
-    if(rcl_is_office()){    // все нужно только в кабинете
-        rcl_enqueue_style('tc_style',rcl_addon_url('style.css', __FILE__));
-        rcl_enqueue_script('tc_script', rcl_addon_url( 'js/scripts.js', __FILE__ ),false,true);
-    }
+    if( !rcl_is_office() ) return false;   // все нужно только в кабинете
+
+    rcl_enqueue_style('tc_style',rcl_addon_url('style.css', __FILE__));
+    rcl_enqueue_script('tc_script', rcl_addon_url( 'js/scripts.js', __FILE__ ),false,true);
+
 }
 add_action('rcl_enqueue_scripts','tc_load_resource',10);
 
 
 
 // объявим поддержку аватарки и модального окна (подробная информация)
-add_action('rcl_addons_included','tc_template_options',10);
 function tc_template_options(){
     rcl_template_support('avatar-uploader');
     rcl_template_support('modal-user-details');
 }
+add_action('rcl_addons_included','tc_template_options',10);
 
 
 
 // "Подробная информация"
 function tc_user_info(){
     if(rcl_exist_addon('user-info-tab')) return false; // не нужна она при допе user-info-tab
-    rcl_dialog_scripts();
+
+    rcl_dialog_scripts(); // скрипт диалогового окна
     $out = '<span title="Подробная информация" onclick="rcl_get_user_info(this);return false;" class="tc_usr_info">';
         $out .= '<i class="fa fa-info"></i>';
     $out .= '</span>';
@@ -43,7 +45,7 @@ function tc_home_button_on_menu($menu){
     if(!$user_ID) return $menu;
 
     $button = '';
-    if(!rcl_is_office($user_ID)){
+    if(!rcl_is_office($user_ID)){ // не в своем ЛК
         global $rcl_user_URL;
         $button = '<span class="rcl-tab-button">';
             $button .= rcl_get_button('В свой кабинет', $rcl_user_URL, array('icon'=>'fa-home','id'=>'tc_home_button'));
