@@ -140,6 +140,7 @@ function tc_author_menu($user_lk){
 
 // имя автора. Оно является ссылкой на главную страницу (примем за факт что ui tab главная)
 function tc_username($user_lk){
+    do_action('tc_pre_username'); // хук, сработает перед именем
 
     $name = get_the_author_meta('display_name',$user_lk);
     if(rcl_exist_addon('user-info-tab')){
