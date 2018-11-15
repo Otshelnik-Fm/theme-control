@@ -1,16 +1,31 @@
 <?php
 
+
+/*
+
+╔═╗╔╦╗╔═╗╔╦╗
+║ ║ ║ ╠╣ ║║║ http://otshelnik-fm.ru
+╚═╝ ╩ ╚  ╩ ╩
+
+*/
+
+
+
 // подключаем настройки
 require_once('inc/settings.php');
 
+
+// great packer's
+//   https://cssminifier.com/
+//   http://dean.edwards.name/packer/
 
 
 // подключим стили и скрипт
 function tc_load_resource() {
     if( !rcl_is_office() ) return false;   // все нужно только в кабинете
 
-    rcl_enqueue_style('tc_style',rcl_addon_url('style.css', __FILE__));
-    rcl_enqueue_script('tc_script', rcl_addon_url( 'js/scripts.js', __FILE__ ),false,true);
+    rcl_enqueue_style('tc_style',rcl_addon_url('assets/style.min.css', __FILE__));
+    rcl_enqueue_script('tc_script', rcl_addon_url( 'assets/scripts.min.js', __FILE__ ),false,true);
 
 }
 add_action('rcl_enqueue_scripts','tc_load_resource',10);
@@ -32,7 +47,7 @@ function tc_user_info(){
 
     rcl_dialog_scripts(); // скрипт диалогового окна
     $out = '<span title="Подробная информация" onclick="rcl_get_user_info(this);return false;" class="tc_usr_info">';
-        $out .= '<i class="fa fa-info"></i>';
+        $out .= '<i class="rcli fa-info"></i>';
     $out .= '</span>';
 
     echo $out;
@@ -106,29 +121,29 @@ function tc_author_menu($user_lk){
     if(!rcl_is_office($user_ID)) return false; // если чужой кабинет
 
     $out = '<div id="tc_amenu" class="tc_author_menu">';
-        $out .= '<i class="tc_clck fa fa-chevron-down"></i>';
+        $out .= '<i class="tc_clck rcli fa-chevron-down"></i>';
         $out .= '<div class="tc_dropdown">';
             if(!rcl_exist_addon('user-info-tab')){
                 $out .= '<div class="tc_line tc_ava">';
-                    $out .= '<a class="tc_ava_upload" title="Загрузка аватара" url="#"><i class="fa fa-download"></i><span>Загрузить аватарку</span><input id="userpicupload" accept="image/*" name="userpicupload" type="file"></a>';
+                    $out .= '<a class="tc_ava_upload" title="Загрузка аватара" url="#"><i class="rcli fa-download"></i><span>Загрузить аватарку</span><input id="userpicupload" accept="image/*" name="userpicupload" type="file"></a>';
                 $out .= '</div>';
             }
             if(rcl_exist_addon('profile')){
                 $out .= '<div class="tc_line">';
                     if(rcl_exist_addon('user-info-tab')){ // если активен доп - ajax загрузка ред. профиля
-                        $out .= '<a class="rcl-ajax" data-post="'.uit_ajax_data($user_lk,$uit_tab_id = 'profile').'" href="?tab=profile"><i class="fa fa-pencil"></i><span>Редактировать профиль</span></a>';
+                        $out .= '<a class="rcl-ajax" data-post="'.uit_ajax_data($user_lk,$uit_tab_id = 'profile').'" href="?tab=profile"><i class="rcli fa-pencil"></i><span>Редактировать профиль</span></a>';
                     } else {
-                        $out .= '<a href="?tab=profile"><i class="fa fa-pencil"></i><span>Редактировать профиль</span></a>';
+                        $out .= '<a href="?tab=profile"><i class="rcli fa-pencil"></i><span>Редактировать профиль</span></a>';
                     }
                 $out .= '</div>';
             }
             if(current_user_can('activate_plugins')){
                 $out .= '<div class="tc_line">';
-                    $out .= '<a href="'.admin_url().'"><i class="fa fa-external-link-square"></i><span>В админку</span></a>';
+                    $out .= '<a href="'.admin_url().'"><i class="rcli fa-external-link-square"></i><span>В админку</span></a>';
                 $out .= '</div>';
             }
             $out .= '<div class="tc_line">';
-                $out .= '<a href="'.wp_logout_url('/').'"><i class="fa fa-sign-out"></i><span>Выход</span></a>';
+                $out .= '<a href="'.wp_logout_url('/').'"><i class="rcli fa-sign-out"></i><span>Выход</span></a>';
             $out .= '</div>';
         $out .= '</div>';
     $out .= '</div>';

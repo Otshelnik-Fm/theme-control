@@ -90,7 +90,7 @@
 .tc_dropdown .tc_line > a:hover {
     text-decoration: none;
 }
-.tc_dropdown .fa {
+.tc_dropdown .rcli {
     font-size: 18px;
     width: 28px;
 }
@@ -160,7 +160,7 @@
     display: inline-block;
     padding: 8px;
 }
-#tc_actions .fa {
+#tc_actions .rcli {
     display: none;
 }
 #tc_actions span {
@@ -198,7 +198,7 @@
     background-color: #e5e5e5;
     border-bottom: 2px solid #ccc;
 }
-#tc_counters .fa {
+#tc_counters .rcli {
     display: none;
 }
 #tc_counters a > span {
@@ -258,7 +258,7 @@
     background-color: #e5e5e5;
     border-bottom: 2px solid #ccc;
 }
-#tc_main_menu a .fa {
+#tc_main_menu a .rcli {
     font-size: 16px;
     min-width: 20px;
 }
@@ -290,13 +290,13 @@
     border: 1px solid #aaa;
     color: #000;
 }
-.tc_bmenu .fa {
-	font-size: 23px;
+.tc_bmenu .rcli {
+    font-size: 23px;
 }
 #control_ext_menu {
     background-color: #fff;
     border-left: 6px solid #ccc;
-	display: none;
+    display: none;
     left: -100%;
     position: absolute;
     transition: left 0.25s ease-in-out 0s;
@@ -320,7 +320,7 @@
     background-color: #e5e5e5;
     border-bottom: 2px solid #ccc;
 }
-#control_ext_menu .fa {
+#control_ext_menu .rcli {
     font-size: 16px;
     min-width: 20px;
 }

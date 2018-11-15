@@ -70,7 +70,7 @@ function alignMenu(){
         }
     });
 
-    LkMenu.prepend('<span class="tc_bmenu"><i class="fa fa-chevron-down"></i></span>');
+    LkMenu.prepend('<span class="tc_bmenu"><i class="rcli fa-chevron-down"></i></span>');
 
     $('body').append('<div id="control_ext_menu">' + menuhtml + '</div>');
 
