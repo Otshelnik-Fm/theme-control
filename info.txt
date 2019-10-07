@@ -1,8 +1,8 @@
 Name: Theme Control;
-Version: 1.3.0;
+Version: 1.4.0;
 Support Core: 16.16.0;
 Template: Theme Control;
 Description: Шаблон личного кабинета для совместной работы с дополнением User Info Tab;
 Author: Владимир Дружаев (Otshelnik-Fm);
-Author URI: http://otshelnik-fm.ru/;
+Author URI: https://otshelnik-fm.ru/?utm_source=free-addons&utm_medium=addon-manager&utm_campaign=theme-control&utm_content=not-domain&utm_term=home-page;
 Add-on URI: https://codeseller.ru/products/theme-control/;

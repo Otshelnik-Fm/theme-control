@@ -36,6 +36,13 @@
 
 
 == Changelog ==
+= 2019-10-07 =
+v1.4.0
+* поддержка дополнения <a href="https://codeseller.ru/products/friends-cabinet-access/" target="_blank">Friends Cabinet Access</a>
+- не закрывался блок "Подробная информация"
+* исправлены php уведомления уровня notice
+
+
 = 2018-11-15 =
 v1.3.0
 * поддержка WP-Recall 16.16
@@ -76,4 +83,4 @@ v1.0
 * При возникновении проблемы, создайте соотвествующую тему на <a href="https://codeseller.ru/forum/product-14506/" target="_blank">форуме поддержки</a> товара
 * Если вам нужна доработка под ваши нужды - вы можете обратиться ко мне в <a href="https://codeseller.ru/author/otshelnik-fm/?tab=chat" target="_blank">ЛС</a> с техзаданием на платную доработку.
 
-Все мои работы опубликованы <a href="https://otshelnik-fm.ru/?p=2562" target="_blank">на моём сайте</a> и в каталоге магазина <a href="https://codeseller.ru/author/otshelnik-fm/?tab=publics&subtab=type-products" target="_blank">CodeSeller.ru</a>
+Все мои работы опубликованы <a href="https://otshelnik-fm.ru/?p=2562&utm_source=free-addons&utm_medium=addon-description&utm_campaign=theme-control&utm_content=codeseller.ru&utm_term=all-my-addons" target="_blank">на моём сайте</a> и в каталоге магазина <a href="https://codeseller.ru/author/otshelnik-fm/?tab=publics&subtab=type-products" target="_blank">CodeSeller.ru</a>
