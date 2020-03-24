@@ -9,36 +9,70 @@
  */
 
 
-// подключаем настройки
-require_once('inc/settings.php');
-
-
-/* great packer's
- *  https://cssminifier.com/
- *  http://dean.edwards.name/packer/
- *
- */
-//
-// подключим стили и скрипт
-add_action( 'rcl_enqueue_scripts', 'tc_load_resource', 10 );
-function tc_load_resource() {
-    // все нужно только в кабинете
-    if ( ! rcl_is_office() )
-        return false;
-
-    rcl_enqueue_style( 'tc_style', rcl_addon_url( 'assets/style.min.css', __FILE__ ) );
-    rcl_enqueue_script( 'tc_script', rcl_addon_url( 'assets/scripts.min.js', __FILE__ ), false, true );
+/* admin options */
+if ( is_admin() ) {
+    require_once 'inc/settings.php';
 }
 
-// объявим поддержку аватарки и модального окна (подробная информация)
-add_action( 'rcl_addons_included', 'tc_template_options', 10 );
-function tc_template_options() {
-    rcl_template_support( 'avatar-uploader' );
-    rcl_template_support( 'modal-user-details' );
+/* load */
+require_once 'inc/author-menu.php';
+require_once 'inc/button-reorder.php';
+require_once 'inc/theme-supports.php';
+
+
+// Константа TCL_THEME.
+if ( ! defined( 'TCL_THEME' ) ) {
+    define( 'TCL_THEME', __FILE__ );
+}
+
+
+/*
+ *  great packer's
+ *      https://cssminifier.com/
+ *      http://dean.edwards.name/packer/
+ *
+ */
+
+/* подключим стили и скрипт */
+add_action( 'rcl_enqueue_scripts', 'tcl_load_resource', 10 );
+function tcl_load_resource() {
+    if ( ! rcl_is_office() )
+        return;
+
+    rcl_enqueue_style( 'tcl_style', rcl_addon_url( 'assets/css/theme-control.min.css', __FILE__ ) );
+
+    global $user_ID;
+
+    if ( rcl_exist_addon( 'liberty-tabs' ) && rcl_is_office( $user_ID ) )
+        return;
+
+    rcl_enqueue_script( 'tcl_script', rcl_addon_url( 'assets/js/theme-control.min.js', __FILE__ ), false, true );
+}
+
+// стили кнопок
+add_action( 'rcl_enqueue_scripts', 'tcl_load_button_styles', 10 );
+function tcl_load_button_styles() {
+    if ( ! rcl_is_office() )
+        return;
+
+    if ( is_customize_preview() )
+        return;
+
+    // стиль типа кнопок:
+    $type = rcl_get_option( 'tcl_bttn', 'lite' );
+
+    rcl_enqueue_style( 'tcl_style_bttn', rcl_addon_url( 'assets/css/lk-button-' . $type . '.min.css', __FILE__ ) );
+}
+
+add_action( 'plugins_loaded', 'tcl_textdomain', 10 );
+function tcl_textdomain() {
+    global $locale;
+
+    load_textdomain( 'theme-control', rcl_addon_path( __FILE__ ) . '/languages/theme-control-' . $locale . '.mo' );
 }
 
 // "Подробная информация"
-function tc_user_info() {
+function tcl_user_info() {
     // не нужна она при допе user-info-tab
     if ( rcl_exist_addon( 'user-info-tab' ) )
         return;
@@ -47,19 +81,22 @@ function tc_user_info() {
     if ( rcl_exist_addon( 'friends-cabinet-access' ) && rcl_get_option( 'fca_info', 'yes' ) == 'yes' )
         return;
 
+    if ( rcl_get_option( 'tcl_info', '1' ) == 0 )
+        return;
+
     // скрипт диалогового окна
     rcl_dialog_scripts();
 
-    $out = '<span title="Подробная информация" onclick="rcl_get_user_info(this);return false;" class="tc_usr_info">';
+    $out = '<button title="' . __( 'Detailed information', 'theme-control' ) . '" onclick="rcl_get_user_info(this);return false;" class="tcl_info tcl_shev tcl_border">';
     $out .= '<i class="rcli fa-info"></i>';
-    $out .= '</span>';
+    $out .= '</button>';
 
     echo $out;
 }
 
 // в чужом кабинете покажем над всеми кнопками кнопку возвращения к себе в кабинет
-add_filter( 'rcl_content_area_menu', 'tc_home_button_on_menu' );
-function tc_home_button_on_menu( $menu ) {
+add_filter( 'rcl_content_area_menu', 'tcl_home_button_on_menu' );
+function tcl_home_button_on_menu( $menu ) {
     if ( ! is_user_logged_in() )
         return $menu;
 
@@ -70,116 +107,229 @@ function tc_home_button_on_menu( $menu ) {
     // не в своем ЛК
     if ( ! rcl_is_office( $user_ID ) ) {
         global $rcl_user_URL;
+
         $button = '<span class="rcl-tab-button">';
-        $button .= rcl_get_button( 'В свой кабинет', $rcl_user_URL, array( 'icon' => 'fa-home', 'id' => 'tc_home_button' ) );
+        $button .= rcl_get_button( __( 'Into his office', 'theme-control' ), $rcl_user_URL, array( 'icon' => 'fa-home', 'id' => 'tcl_home_bttn' ) );
         $button .= '</span>';
     }
     return $button . $menu;
 }
 
-// регистрируем 2 области виджетов
-add_action( 'widgets_init', 'tc_sidebar_before' );
-function tc_sidebar_before() {
-    register_sidebar( array(
-        'name'          => "RCL: Сайдбар над личным кабинетом",
-        'id'            => 'tc_sidebar_before',
-        'description'   => 'Выводится только в личном кабинете',
-        'before_title'  => '<h3 class="tc_title_before">',
-        'after_title'   => '</h3>',
-        'before_widget' => '<div class="tc_cabinet_sidebar_before">',
-        'after_widget'  => '</div>'
-    ) );
-}
-
-add_action( 'rcl_area_before', 'tc_add_sidebar_area_before' );
-function tc_add_sidebar_area_before() {
-    if ( function_exists( 'dynamic_sidebar' ) ) {
-        dynamic_sidebar( 'tc_sidebar_before' );
-    }
-}
-
-add_action( 'widgets_init', 'tc_sidebar_after' );
-function tc_sidebar_after() {
-    register_sidebar( array(
-        'name'          => "RCL: Сайдбар под личным кабинетом",
-        'id'            => 'tc_sidebar_after',
-        'description'   => 'Выводится только в личном кабинете',
-        'before_title'  => '<h3 class="tc_title_after">',
-        'after_title'   => '</h3>',
-        'before_widget' => '<div class="tc_cabinet_sidebar_after">',
-        'after_widget'  => '</div>'
-    ) );
-}
-
-add_action( 'rcl_area_after', 'tc_add_sidebar_area_after' );
-function tc_add_sidebar_area_after() {
-    if ( function_exists( 'dynamic_sidebar' ) ) {
-        dynamic_sidebar( 'tc_sidebar_after' );
-    }
-}
-
-// меню для автора
-function tc_author_menu( $user_lk ) {
-    global $user_ID;
-
-    // если чужой кабинет
-    if ( ! rcl_is_office( $user_ID ) )
-        return false;
-
-    $out = '<div id="tc_amenu" class="tc_author_menu">';
-    $out .= '<i class="tc_clck rcli fa-chevron-down"></i>';
-    $out .= '<div class="tc_dropdown">';
-    if ( ! rcl_exist_addon( 'user-info-tab' ) ) {
-        $out .= '<div class="tc_line tc_ava">';
-        $out .= '<a class="tc_ava_upload" title="Загрузка аватара" url="#"><i class="rcli fa-download"></i><span>Загрузить аватарку</span><input id="userpicupload" accept="image/*" name="userpicupload" type="file"></a>';
-        $out .= '</div>';
-    }
-    if ( rcl_exist_addon( 'profile' ) ) {
-        $out .= '<div class="tc_line">';
-        // если активен доп - ajax загрузка ред. профиля
-        if ( rcl_exist_addon( 'user-info-tab' ) ) {
-            $out        .= '<a class="rcl-ajax" data-post="' . uit_ajax_data( $user_lk, $uit_tab_id = 'profile' ) . '" href="?tab=profile"><i class="rcli fa-pencil"></i><span>Редактировать профиль</span></a>';
-        } else {
-            $out .= '<a href="?tab=profile"><i class="rcli fa-pencil"></i><span>Редактировать профиль</span></a>';
-        }
-        $out .= '</div>';
-    }
-    if ( current_user_can( 'activate_plugins' ) ) {
-        $out .= '<div class="tc_line">';
-        $out .= '<a href="' . admin_url() . '"><i class="rcli fa-external-link-square"></i><span>В админку</span></a>';
-        $out .= '</div>';
-    }
-    $out .= '<div class="tc_line">';
-    $out .= '<a href="' . wp_logout_url( '/' ) . '"><i class="rcli fa-sign-out"></i><span>Выход</span></a>';
-    $out .= '</div>';
-    $out .= '</div>';
-    $out .= '</div>';
-
-    echo $out;
-}
-
-// имя автора. Оно является ссылкой на главную страницу (примем за факт что ui tab главная)
-function tc_username( $user_lk ) {
+/* имя автора. Оно является ссылкой на главную страницу (примем за факт что ui tab главная) */
+function tcl_username( $user_lk ) {
     // хук, сработает перед именем
-    do_action( 'tc_pre_username' );
+    do_action( 'tcl_pre_username' );
 
     $name = get_the_author_meta( 'display_name', $user_lk );
     if ( rcl_exist_addon( 'user-info-tab' ) ) {
-        $out        = '<a class="rcl-ajax tc_author_name" data-post="' . uit_ajax_data( $user_lk, $uit_tab_id = 'user-info' ) . '" href="?tab=user-info">' . $name . '</a>';
+        $out        = '<a class="rcl-ajax tcl_username" data-post="' . uit_ajax_data( $user_lk, $uit_tab_id = 'user-info' ) . '" href="?tab=user-info">' . $name . '</a>';
     } else {
-        $out = '<a class="tc_author_name" href="?home">' . $name . '</a>';
+        $out = '<a class="tcl_username" href="?home">' . $name . '</a>';
     }
+
+    $out = apply_filters( 'tcl_name', $out );
+
     echo $out;
 }
 
-//////////////////////////////////
-//          Customizer          //
-//////////////////////////////////////////////////////////////////////////////////
-// подключим кастомайзер в зависимости от настроек
-add_action( 'init', 'tc_connect_customizer' );
-function tc_connect_customizer() {
-    if ( rcl_get_option( 'tc_cstmzr', 0 ) != 1 )
-        return false;
+// аватарка в ЛК
+add_action( 'tcl_pre_username', 'tcl_ava_before_name' );
+function tcl_ava_before_name() {
+    if ( rcl_get_option( 'tcl_ava', '0' ) == 0 )
+        return;
 
-    require_once 'inc/customizer.php';
+    global $user_LK;
+
+    echo '<div id="tcl_ava" class="tcl_avatar">' . get_avatar( $user_LK, 36, '', 'user_avatar', [ 'class' => 'tcl_border' ] ) . '</div>';
+}
+
+// в сети - не в сети
+function tcl_user_action() {
+    global $rcl_userlk_action;
+
+    $last_action = rcl_get_useraction( $rcl_userlk_action );
+    $class       = ( ! $last_action) ? 'online' : 'offline';
+
+    $status = __( 'online', 'theme-control' );
+    if ( $last_action )
+        $status = __( 'offline', 'theme-control' ) . ' ' . $last_action;
+
+    echo sprintf( '<span class="tcl_status %s">%s</span>', $class, $status );
+}
+
+// выведем статус
+add_action( 'tcl_before_actions', 'tcl_user_description', 6 );
+function tcl_user_description() {
+    if ( rcl_get_option( 'tcl_say', '0' ) == 0 )
+        return;
+
+    global $user_LK;
+
+    $desckr = get_the_author_meta( 'description', $user_LK );
+
+    if ( empty( $desckr ) )
+        return;
+
+    $des    = wp_strip_all_tags( $desckr );
+    $des_br = nl2br( $des );
+
+    echo '<div class="tcl_say"><span>' . $des . '</span>'
+    . '<div class="tcl_hid tcl_slide">' . $des_br . '</div></div>';
+}
+
+// выкл окно просмотра статуса если статус короткий
+add_action( 'wp_footer', 'tcl_check_hypens' );
+function tcl_check_hypens() {
+    if ( ! rcl_is_office() )
+        return;
+
+    if ( rcl_get_option( 'tcl_say', '0' ) == 0 )
+        return;
+
+    global $user_LK;
+
+    $desckr = get_the_author_meta( 'description', $user_LK );
+
+    if ( empty( $desckr ) )
+        return;
+
+    $out = '(function($){var b=$(".tcl_say span");'
+        . 'function tclSay(){var a=$(b).clone().css({display:"inline",width:"auto",visibility:"hidden"}).appendTo("body");'
+        . 'if(a.width()>b.width()){$(".tcl_hid").show()}else{$(".tcl_hid").hide()}a.remove()}'
+        . '$(document).ready(function(){tclSay()});$(window).resize(function(){tclSay()})})(jQuery);';
+
+    echo '<script>' . $out . '</script>';
+}
+
+/* RAW js */
+
+//(function($) {
+//    var el = $(".tcl_say span");
+//
+//    function tclSay() {
+//        var tst = $(el).clone().css({
+//            display: "inline",
+//            width: "auto",
+//            visibility: "hidden"
+//        }).appendTo("body");
+//        if (tst.width() > el.width()) {
+//            $(".tcl_hid").show();
+//        } else {
+//            $(".tcl_hid").hide();
+//        }
+//        tst.remove();
+//    }
+//    $(document).ready(function() {
+//        tclSay();
+//    });
+//    $(window).resize(function() {
+//        tclSay();
+//    });
+//})(jQuery);
+
+
+/**
+ * добавим тип выбранных кнопок
+ *
+ * @since 2.0
+ *
+ * @return string   body class button.
+ */
+add_filter( 'body_class', 'tcl_add_body_class_bttn' );
+function tcl_add_body_class_bttn( $classes ) {
+    if ( ! rcl_is_office() )
+        return $classes;
+
+    $classes[] = 'tcl_b' . rcl_get_option( 'tcl_bttn', 'lite' );
+
+    return $classes;
+}
+
+// инлайн стиль цвета для :root переменных css
+add_filter( 'rcl_inline_styles', 'tcl_inline_root_variable_style', 10, 2 );
+function tcl_inline_root_variable_style( $styles, $rgb ) {
+    if ( ! rcl_is_office() )
+        return $styles;
+
+    $rcl_color = rcl_get_option( 'primary-color', '#4c8cbd' );
+
+    list($r, $g, $b) = $rgb;
+
+    // темнее rgb
+    $rd = round( $r * 0.45 );
+    $gd = round( $g * 0.45 );
+    $bd = round( $b * 0.45 );
+
+    // ярче rgb
+    $rl = round( $r * 1.4 );
+    $gl = round( $g * 1.4 );
+    $bl = round( $b * 1.4 );
+
+    // инверт rgb
+    $rf = round( 0.75 * (255 - $r) );
+    $gf = round( 0.75 * (255 - $g) );
+    $bf = round( 0.75 * (255 - $b) );
+
+
+    $styles .= '
+:root{
+--tclPHex:' . $rcl_color . ';
+--tclP:' . $r . ',' . $g . ',' . $b . ';
+--tclPDark:' . $rd . ',' . $gd . ',' . $bd . ';
+--tclPLight:' . $rl . ',' . $gl . ',' . $bl . ';
+--tclPFlip:' . $rf . ',' . $gf . ',' . $bf . ';
+}
+';
+
+    return $styles;
+}
+
+// отменю цвет реколл кнопок и верну что там лишнее
+add_action( 'init', 'tcl_delete_rcl_inline_styles' );
+function tcl_delete_rcl_inline_styles() {
+    if ( ! rcl_is_office() )
+        return;
+
+    remove_filter( 'rcl_inline_styles', 'rcl_default_inline_styles', 5, 2 );
+}
+
+//
+add_filter( 'rcl_inline_styles', 'tcl_button_border_radius', 10 );
+function tcl_button_border_radius( $styles ) {
+    if ( ! rcl_is_office() )
+        return $styles;
+
+    if ( rcl_get_option( 'tcl_brd', '0' ) == 0 )
+        return $styles;
+
+    // этот тип кнопок не может иметь радиус
+    if ( rcl_get_option( 'tcl_bttn', 'lite' ) == 'prim' )
+        return $styles;
+
+    $styles .= '
+.pager-item > *,
+.recall-button {
+    border-radius: ' . rcl_get_option( 'tcl_brd' ) . 'px !important;
+}
+';
+
+    return $styles;
+}
+
+add_filter( 'rcl_inline_styles', 'tcl_button_offset', 10 );
+function tcl_button_offset( $styles ) {
+    if ( ! rcl_is_office() )
+        return $styles;
+
+    $styles .= '
+.data-filter,
+.rcl-tab-button,
+.pager-item > *,
+.rcl-subtab-button,
+.recall_content_block .rcl-subtab-menu {
+    margin: ' . rcl_get_option( 'tcl_mrg', '3' ) . 'px !important;
+}
+';
+
+    return $styles;
 }

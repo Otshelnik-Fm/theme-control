@@ -1,0 +1,38 @@
+/*
+
+DEFAULT                 |   HOVER & ACTIVE
+                        |
+color:  #353535         |   color:  #fff
+background: transparent |   background: primary
+
+*/
+
+.tcl_shev {
+    color: rgb(var(--tclPDark)) !important;
+}
+.pager-item > *,
+.recall-button {
+    background: transparent !important;
+    border: 2px solid transparent  !important;
+    color: rgb(var(--tclPDark)) !important;
+}
+.tcl_shev:focus,
+.tcl_bmenu:hover,
+.pager-item.type-current > *,
+.pager-item a:hover,
+.recall-button:hover,
+.recall-button[class*="active"], /* e.g. filter-active*/
+input[type="submit"].recall-button {
+    background: var(--tclPHex) !important;
+    box-shadow: none !important;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+#tcl_amenu:hover {
+    background: var(--tclPHex) !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+}
+.tcl_info:hover {
+    border-color: rgba(var(--tclPDark),.4) !important;
+}

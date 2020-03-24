@@ -1,0 +1,35 @@
+/*
+
+DEFAULT                 |   HOVER & ACTIVE
+                        |
+color:  #353535         |   color:  #353535
+background: transparent |   background: transparent
+border: 1px transparent |   border-color: primary
+
+*/
+
+.tcl_shev {
+    color: rgb(var(--tclPDark)) !important;
+}
+.pager-item > *,
+.recall-button {
+    background: transparent !important;
+    border: 2px solid transparent  !important;
+    color: rgb(var(--tclPDark)) !important;
+}
+.tcl_shev:focus,
+.tcl_shev:hover,
+.pager-item.type-current > *,
+.pager-item a:hover,
+.recall-button:hover,
+.recall-button[class*="active"] { /* e.g. filter-active*/
+    background: none;
+    border-color: rgba(var(--tclP),.4) !important;
+    box-shadow: none !important;
+    opacity: 1;
+    text-decoration: none !important;
+}
+input[type="submit"].recall-button {
+    background: var(--tclPHex) !important;
+    color: #fff !important;
+}

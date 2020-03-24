@@ -1,0 +1,31 @@
+/*
+не используется. для тестов
+но эти стили настраиваются в кастомайзере
+*/
+
+.tcl_shev {
+    color: rgb(var(--tclPDark)) !important;
+}
+.tcl_shev:focus,
+.tcl_shev:hover {
+    border-color: rgba(var(--tclPDark),.4) !important;
+}
+.tcl_bmenu,
+.pager-item:not(.type-separator) > *,
+.recall-button:not(.active) {
+    background: var(--tclPHex) !important;
+    border: 2px solid transparent  !important;
+    box-shadow: none !important;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+.tcl_bmenu:hover,
+.pager-item.type-current > *,
+.pager-item a:hover,
+.recall-button:hover,
+.recall-button[class*="active"],  /*e.g. filter-active*/
+input[type="submit"].recall-button {
+    background: rgb(var(--tclPLight)) !important;
+    border-color: rgba(var(--tclPDark),.4) !important;
+    color: #fff !important;
+}

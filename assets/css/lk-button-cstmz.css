@@ -1,0 +1,23 @@
+.tcl_shev:focus,
+.tcl_shev:hover {
+    border-color: rgba(var(--tclPDark),.4) !important;
+}
+.tcl_bmenu,
+.pager-item:not(.type-separator) > *,
+.recall-button {
+    background: var(--tclBck) !important;
+    border: 2px solid var(--tclBrd) !important;
+    box-shadow: none !important;
+    color: var(--tclClr) !important;
+    text-decoration: none !important;
+}
+.tcl_bmenu:hover,
+.pager-item.type-current > *,
+.pager-item a:hover,
+.recall-button:hover,
+.recall-button[class*="active"],
+input[type="submit"].recall-button {
+    background: var(--tclBckA) !important;
+    border-color: var(--tclBrdA) !important;
+    color: #fff !important;
+}
