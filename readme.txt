@@ -160,6 +160,11 @@ function my_author_menu_item_add_publication( $data ) {
 
 
 == Changelog ==
+= 2020-03-25 =
+v2.0.2
+* Корректировки для верной работы с дополнением <a href="https://codeseller.ru/products/autobot-cabinet/" target="_blank">Autobot cabinet</a>
+
+
 = 2020-03-24 =
 v2.0.1
 * Пропавшие переводы - вернул ))

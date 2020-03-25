@@ -77,6 +77,10 @@ function tcl_user_info() {
     if ( rcl_exist_addon( 'user-info-tab' ) )
         return;
 
+    // автобот доп и это кабинет автобота
+    if ( rcl_exist_addon( 'autobot-cabinet' ) && atbc_is_autobot() )
+        return;
+
     // поддержка настройки допа Friends Cabinet Access
     if ( rcl_exist_addon( 'friends-cabinet-access' ) && rcl_get_option( 'fca_info', 'yes' ) == 'yes' )
         return;
@@ -122,7 +126,12 @@ function tcl_username( $user_lk ) {
 
     $name = get_the_author_meta( 'display_name', $user_lk );
     if ( rcl_exist_addon( 'user-info-tab' ) ) {
-        $out        = '<a class="rcl-ajax tcl_username" data-post="' . uit_ajax_data( $user_lk, $uit_tab_id = 'user-info' ) . '" href="?tab=user-info">' . $name . '</a>';
+        // автобот доп и это кабинет автобота
+        if ( rcl_exist_addon( 'autobot-cabinet' ) && atbc_is_autobot() ) {
+            $out = '<a class="tcl_username" href="?home">' . $name . '</a>';
+        } else {
+            $out        = '<a class="rcl-ajax tcl_username" data-post="' . uit_ajax_data( $user_lk, $uit_tab_id = 'user-info' ) . '" href="?tab=user-info">' . $name . '</a>';
+        }
     } else {
         $out = '<a class="tcl_username" href="?home">' . $name . '</a>';
     }
@@ -136,6 +145,10 @@ function tcl_username( $user_lk ) {
 add_action( 'tcl_pre_username', 'tcl_ava_before_name' );
 function tcl_ava_before_name() {
     if ( rcl_get_option( 'tcl_ava', '0' ) == 0 )
+        return;
+
+    // автобот доп и это кабинет автобота
+    if ( rcl_exist_addon( 'autobot-cabinet' ) && atbc_is_autobot() )
         return;
 
     global $user_LK;
@@ -163,6 +176,10 @@ function tcl_user_description() {
     if ( rcl_get_option( 'tcl_say', '0' ) == 0 )
         return;
 
+    // автобот доп и это кабинет автобота
+    if ( rcl_exist_addon( 'autobot-cabinet' ) && atbc_is_autobot() )
+        return;
+
     global $user_LK;
 
     $desckr = get_the_author_meta( 'description', $user_LK );
@@ -184,6 +201,10 @@ function tcl_check_hypens() {
         return;
 
     if ( rcl_get_option( 'tcl_say', '0' ) == 0 )
+        return;
+
+    // автобот доп и это кабинет автобота
+    if ( rcl_exist_addon( 'autobot-cabinet' ) && atbc_is_autobot() )
         return;
 
     global $user_LK;

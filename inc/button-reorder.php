@@ -64,6 +64,10 @@ function tcl_blacklist_button() {
     if ( ! tcl_is_other_lk() || rcl_exist_addon( 'friends-recall' ) )
         return;
 
+    // автобот доп и это кабинет автобота
+    if ( rcl_exist_addon( 'autobot-cabinet' ) && atbc_is_autobot() )
+        return;
+
     global $user_LK;
 
     // кнопка чёрный список
@@ -74,6 +78,10 @@ function tcl_blacklist_button() {
 add_action( 'tcl_after_actions', 'tcl_feed_actions_button', 200 );
 function tcl_feed_actions_button() {
     if ( ! tcl_is_other_lk() || ! rcl_exist_addon( 'feed' ) )
+        return;
+
+    // автобот доп и это кабинет автобота
+    if ( rcl_exist_addon( 'autobot-cabinet' ) && atbc_is_autobot() )
         return;
 
     global $user_LK;
@@ -87,6 +95,10 @@ function tcl_friend_button() {
     if ( ! is_user_logged_in() || ! rcl_exist_addon( 'friends-recall' ) )
         return;
 
+    // автобот доп и это кабинет автобота
+    if ( rcl_exist_addon( 'autobot-cabinet' ) && atbc_is_autobot() )
+        return;
+
     echo frnd_get_actions_cabinet();
 }
 
@@ -94,6 +106,10 @@ function tcl_friend_button() {
 add_action( 'tcl_after_actions', 'tcl_presents_button', 200 );
 function tcl_presents_button() {
     if ( ! is_user_logged_in() || ! rcl_exist_addon( 'presents' ) )
+        return;
+
+    // автобот доп и это кабинет автобота
+    if ( rcl_exist_addon( 'autobot-cabinet' ) && atbc_is_autobot() )
         return;
 
     if ( ! tcl_is_other_lk() )
@@ -108,6 +124,10 @@ function tcl_presents_button() {
 add_action( 'tcl_after_actions', 'tcl_presents_pro_button', 200 );
 function tcl_presents_pro_button() {
     if ( ! is_user_logged_in() || ! rcl_exist_addon( 'presents-pro' ) )
+        return;
+
+    // автобот доп и это кабинет автобота
+    if ( rcl_exist_addon( 'autobot-cabinet' ) && atbc_is_autobot() )
         return;
 
     if ( ! tcl_is_other_lk() )
