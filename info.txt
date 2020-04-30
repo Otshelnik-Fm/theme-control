@@ -1,5 +1,5 @@
 Name: Theme Control;
-Version: 2.0.2;
+Version: 2.0.3;
 Support Core: 16.18.0;
 Template: Theme Control;
 Description: Шаблон личного кабинета для совместной работы с дополнением User Info Tab;

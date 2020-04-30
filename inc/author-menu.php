@@ -88,7 +88,7 @@ function tcl_author_menu_item_profile( $data, $user_lk ) {
         if ( rcl_exist_addon( 'user-info-tab' ) ) {
             $data       .= '<a class="recall-button rcl-ajax" data-post="' . uit_ajax_data( $user_lk, $uit_tab_id = 'profile' ) . '" href="?tab=profile"><i class="rcli fa-pencil"></i><span>' . __( 'Edit your profile', 'theme-control' ) . '</span></a>';
         } else {
-            $data .= '<a class="recall-button" href="?tab=profile"><i class="rcli fa-pencil"></i><span>' . __( 'Edit your profile', 'theme-control' ) . '</span></a>';
+            $data .= '<a class="recall-button" href="' . rcl_format_url( get_author_posts_url( $user_lk ), 'profile' ) . '"><i class="rcli fa-pencil"></i><span>' . __( 'Edit your profile', 'theme-control' ) . '</span></a>';
         }
         $data .= '</div>';
     }

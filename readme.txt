@@ -160,6 +160,12 @@ function my_author_menu_item_add_publication( $data ) {
 
 
 == Changelog ==
+= 2020-04-30 =
+v2.0.3
+* исправлен баг ссылки на редактирование профиля если не выставлен ЧПУ в WordPress
+* поздравляю свою жену Надю с днём рождения. Я тебя люблю!
+
+
 = 2020-03-25 =
 v2.0.2
 * Корректировки для верной работы с дополнением <a href="https://codeseller.ru/products/autobot-cabinet/" target="_blank">Autobot cabinet</a>
