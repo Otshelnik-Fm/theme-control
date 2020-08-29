@@ -11,25 +11,30 @@ border: 1px transparent |   border-color: primary
 .tcl_shev {
     color: rgb(var(--tclPDark)) !important;
 }
-.pager-item > *,
-.recall-button {
+.recall-button,
+.rcl-bttn {
     background: transparent !important;
     border: 2px solid transparent  !important;
     color: rgb(var(--tclPDark)) !important;
 }
 .tcl_shev:focus,
 .tcl_shev:hover,
-.pager-item.type-current > *,
-.pager-item a:hover,
+.type-current .rcl-bttn,
+.rcl-bttn:hover,
 .recall-button:hover,
-.recall-button[class*="active"] { /* e.g. filter-active*/
+.recall-button[class*="active"], /* e.g. filter-active*/
+.rcl-bttn[class*="rcl-bttn__disabled"] { 
     background: none;
-    border-color: rgba(var(--tclP),.4) !important;
+    border-color: rgba(var(--tclP),.6) !important;
     box-shadow: none !important;
     opacity: 1;
     text-decoration: none !important;
 }
-input[type="submit"].recall-button {
+#cpsubmit,
+#delete_acc,
+.chat-submit,
+.important-shift,
+#rcl-publish-post {
     background: var(--tclPHex) !important;
     color: #fff !important;
 }

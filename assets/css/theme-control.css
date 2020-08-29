@@ -229,6 +229,7 @@ body .tcl_slide > .rcl-tab-button > * {
 .horizontal-menu #lk-menu {
     align-items: center;
 }
+.rcl-subtab-menu .rcl-bttn,
 #tcl_inm a.recall-button {
     margin: 0;
     padding: 6px !important;
@@ -237,6 +238,9 @@ body .tcl_slide > .rcl-tab-button > * {
     font-size: 18px;
     margin: 0 6px 0 0;
     min-width: 20px;
+}
+.rcl-subtab-menu .rcl-bttn .rcl-bttn__text {
+    padding: 0 !important;
 }
 /* END */
 
@@ -322,10 +326,9 @@ div ~ .rcl-pager { /* last pager */
     margin-top: 0;
 }
 .pager-item > * {
-    font-size: 20px;
     font-weight: 500;
     line-height: 1;
-    padding: 6px 12px !important;
+    padding: 0px 3px !important;
 }
 #rcl-office p {
     line-height: 1.4;

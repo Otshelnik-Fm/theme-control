@@ -10,22 +10,28 @@ background: transparent |   background: primary
 .tcl_shev {
     color: rgb(var(--tclPDark)) !important;
 }
-.pager-item > *,
-.recall-button {
+.recall-button,
+.rcl-bttn {
     background: transparent !important;
     border: 2px solid transparent  !important;
     color: rgb(var(--tclPDark)) !important;
-}
+}  
 .tcl_shev:focus,
 .tcl_bmenu:hover,
-.pager-item.type-current > *,
-.pager-item a:hover,
+.type-current .rcl-bttn,
+.rcl-bttn:hover,
 .recall-button:hover,
 .recall-button[class*="active"], /* e.g. filter-active*/
-input[type="submit"].recall-button {
+.rcl-bttn[class*="rcl-bttn__disabled"],
+#cpsubmit,
+#delete_acc,
+.chat-submit,
+.important-shift,
+#rcl-publish-post { 
     background: var(--tclPHex) !important;
     box-shadow: none !important;
     color: #fff !important;
+    opacity: 1;
     text-decoration: none !important;
 }
 #tcl_amenu:hover {

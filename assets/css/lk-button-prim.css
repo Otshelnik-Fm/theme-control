@@ -11,21 +11,23 @@ border-bottom: 2px transparent  |   border-bottom-color: primary
 .tcl_shev {
     color: rgb(var(--tclPDark)) !important;
 }
-.pager-item > *,
-.recall-button {
+.recall-button,
+.rcl-bttn {
     background: transparent !important;
     border: 2px solid transparent  !important;
     color: rgb(var(--tclPDark)) !important;
-}
+}  
 .tcl_shev:focus,
 .tcl_bmenu:hover,
-.pager-item.type-current > *,
-.pager-item a:hover,
+.type-current .rcl-bttn,
+.rcl-bttn:hover,
 .recall-button:hover,
-.recall-button[class*="active"] { /* e.g. filter-active*/
+.recall-button[class*="active"], /* e.g. filter-active*/
+.rcl-bttn[class*="rcl-bttn__disabled"] { 
     background: transparent !important;
     box-shadow: none !important;
     color: var(--tclPHex) !important;
+    opacity: 1;
     text-decoration: none !important;
     border-bottom-color: var(--tclPHex) !important;
 }
@@ -38,8 +40,11 @@ border-bottom: 2px transparent  |   border-bottom-color: primary
 .tcl_info:hover {
     border-color: var(--tclPHex) !important;
 }
-
-input[type="submit"].recall-button {
+#cpsubmit,
+#delete_acc,
+.chat-submit,
+.important-shift,
+#rcl-publish-post {
     background: var(--tclPHex) !important;
     color: #fff !important;
 }

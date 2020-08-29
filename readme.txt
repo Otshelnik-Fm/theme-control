@@ -160,6 +160,12 @@ function my_author_menu_item_add_publication( $data ) {
 
 
 == Changelog ==
+= 2020-08-29 =
+v2.1.0
+* поддержка WP-Recall 16.21.0
+* поддерживается работа с api rcl buttons
+
+
 = 2020-04-30 =
 v2.0.3
 * исправлен баг ссылки на редактирование профиля если не выставлен ЧПУ в WordPress
