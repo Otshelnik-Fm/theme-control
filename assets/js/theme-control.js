@@ -89,6 +89,7 @@ function tclMenu(){
 
 
 // загрузка авы
+if(Rcl.user_ID === Rcl.office_ID){
     setTimeout( function() {
         RclUploaders.get( 'rcl_avatar' ).afterDone = function( e, data ) {
             jQuery( '#tcl_ava img, #recallbar img.avatar' ).attr( 'srcset', '' )
@@ -103,5 +104,6 @@ function tclMenu(){
             status ? rcl_preloader_show( jQuery( '.tcl_right' ) ) : rcl_preloader_hide();
         };
     }, 600 );
+}
 
 })(jQuery);

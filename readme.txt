@@ -161,7 +161,7 @@ function my_author_menu_item_add_publication( $data ) {
 
 == Changelog ==
 = 2020-09-13 =
-v2.2.0
+v2.2.1
 * поддержка WP-Recall 16.23.12
 * починил загрузку аватарки в ЛК
 * дополнение теперь использует css переменные ядра WP-Recall

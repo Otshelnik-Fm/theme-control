@@ -321,7 +321,7 @@ function tcl_button_avatar_upload() {
     global $user_ID;
 
     if ( ! rcl_is_office( $user_ID ) )
-        return false;
+        return;
 
     $uploder = new Rcl_Uploader( 'rcl_avatar', array(
         'multiple'    => 0,
