@@ -4,16 +4,16 @@
 */
 
 .tcl_shev {
-    color: rgb(var(--tclPDark)) !important;
+    color: rgb(var(--rclRgbDark)) !important;
 }
 .tcl_shev:focus,
 .tcl_shev:hover {
-    border-color: rgba(var(--tclPDark),.4) !important;
+    border-color: rgba(var(--rclRgbDark),.4) !important;
 }
 .tcl_bmenu,
 .pager-item:not(.type-separator) > *,
 .recall-button:not(.active) {
-    background: var(--tclPHex) !important;
+    background: var(--rclHex) !important;
     border: 2px solid transparent  !important;
     box-shadow: none !important;
     color: #fff !important;
@@ -25,7 +25,7 @@
 .recall-button:hover,
 .recall-button[class*="active"],  /*e.g. filter-active*/
 input[type="submit"].recall-button {
-    background: rgb(var(--tclPLight)) !important;
-    border-color: rgba(var(--tclPDark),.4) !important;
+    background: rgb(var(--rclRgbLight)) !important;
+    border-color: rgba(var(--rclRgbDark),.4) !important;
     color: #fff !important;
 }

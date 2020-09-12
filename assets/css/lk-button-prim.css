@@ -9,13 +9,13 @@ border-bottom: 2px transparent  |   border-bottom-color: primary
 */
 
 .tcl_shev {
-    color: rgb(var(--tclPDark)) !important;
+    color: rgb(var(--rclRgbDark)) !important;
 }
 .recall-button,
 .rcl-bttn {
     background: transparent !important;
     border: 2px solid transparent  !important;
-    color: rgb(var(--tclPDark)) !important;
+    color: rgb(var(--rclRgbDark)) !important;
 }  
 .tcl_shev:focus,
 .tcl_bmenu:hover,
@@ -26,25 +26,25 @@ border-bottom: 2px transparent  |   border-bottom-color: primary
 .rcl-bttn[class*="rcl-bttn__disabled"] { 
     background: transparent !important;
     box-shadow: none !important;
-    color: var(--tclPHex) !important;
+    color: var(--rclHex) !important;
     opacity: 1;
     text-decoration: none !important;
-    border-bottom-color: var(--tclPHex) !important;
+    border-bottom-color: var(--rclHex) !important;
 }
 #tcl_amenu:hover {
     background: transparent !important;
-    border-color: var(--tclPHex) !important;
+    border-color: var(--rclHex) !important;
     box-shadow: none !important;
     text-decoration: none !important;
 }
 .tcl_info:hover {
-    border-color: var(--tclPHex) !important;
+    border-color: var(--rclHex) !important;
 }
 #cpsubmit,
 #delete_acc,
 .chat-submit,
 .important-shift,
 #rcl-publish-post {
-    background: var(--tclPHex) !important;
+    background: var(--rclHex) !important;
     color: #fff !important;
 }

@@ -8,13 +8,13 @@ background: transparent |   background: primary
 */
 
 .tcl_shev {
-    color: rgb(var(--tclPDark)) !important;
+    color: rgb(var(--rclRgbDark)) !important;
 }
 .recall-button,
 .rcl-bttn {
     background: transparent !important;
     border: 2px solid transparent  !important;
-    color: rgb(var(--tclPDark)) !important;
+    color: rgb(var(--rclRgbDark)) !important;
 }  
 .tcl_shev:focus,
 .tcl_bmenu:hover,
@@ -28,17 +28,17 @@ background: transparent |   background: primary
 .chat-submit,
 .important-shift,
 #rcl-publish-post { 
-    background: var(--tclPHex) !important;
+    background: var(--rclHex) !important;
     box-shadow: none !important;
     color: #fff !important;
     opacity: 1;
     text-decoration: none !important;
 }
 #tcl_amenu:hover {
-    background: var(--tclPHex) !important;
+    background: var(--rclHex) !important;
     box-shadow: none !important;
     text-decoration: none !important;
 }
 .tcl_info:hover {
-    border-color: rgba(var(--tclPDark),.4) !important;
+    border-color: rgba(var(--rclRgbDark),.4) !important;
 }

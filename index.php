@@ -266,45 +266,6 @@ function tcl_add_body_class_bttn( $classes ) {
     return $classes;
 }
 
-// инлайн стиль цвета для :root переменных css
-add_filter( 'rcl_inline_styles', 'tcl_inline_root_variable_style', 10, 2 );
-function tcl_inline_root_variable_style( $styles, $rgb ) {
-    if ( ! rcl_is_office() )
-        return $styles;
-
-    $rcl_color = rcl_get_option( 'primary-color', '#4c8cbd' );
-
-    list($r, $g, $b) = $rgb;
-
-    // темнее rgb
-    $rd = round( $r * 0.45 );
-    $gd = round( $g * 0.45 );
-    $bd = round( $b * 0.45 );
-
-    // ярче rgb
-    $rl = round( $r * 1.4 );
-    $gl = round( $g * 1.4 );
-    $bl = round( $b * 1.4 );
-
-    // инверт rgb
-    $rf = round( 0.75 * (255 - $r) );
-    $gf = round( 0.75 * (255 - $g) );
-    $bf = round( 0.75 * (255 - $b) );
-
-
-    $styles .= '
-:root{
---tclPHex:' . $rcl_color . ';
---tclP:' . $r . ',' . $g . ',' . $b . ';
---tclPDark:' . $rd . ',' . $gd . ',' . $bd . ';
---tclPLight:' . $rl . ',' . $gl . ',' . $bl . ';
---tclPFlip:' . $rf . ',' . $gf . ',' . $bf . ';
-}
-';
-
-    return $styles;
-}
-
 // отменю цвет реколл кнопок и верну что там лишнее
 add_action( 'init', 'tcl_delete_rcl_inline_styles' );
 function tcl_delete_rcl_inline_styles() {
@@ -353,4 +314,57 @@ function tcl_button_offset( $styles ) {
 ';
 
     return $styles;
+}
+
+// выведем input загрузки аватарки
+function tcl_button_avatar_upload() {
+    global $user_ID;
+
+    if ( ! rcl_is_office( $user_ID ) )
+        return false;
+
+    $uploder = new Rcl_Uploader( 'rcl_avatar', array(
+        'multiple'    => 0,
+        'crop'        => 1,
+        'filetitle'   => 'rcl-user-avatar-' . $user_ID,
+        'filename'    => $user_ID,
+        'dir'         => '/uploads/rcl-uploads/avatars',
+        'image_sizes' => array(
+            [
+                'height' => 70,
+                'width'  => 70,
+                'crop'   => 1
+            ],
+            [
+                'height' => 150,
+                'width'  => 150,
+                'crop'   => 1
+            ],
+            [
+                'height' => 300,
+                'width'  => 300,
+                'crop'   => 1
+            ]
+        ),
+        'resize'      => array( 1000, 1000 ),
+        'min_height'  => 150,
+        'min_width'   => 150,
+        'max_size'    => rcl_get_option( 'avatar_weight', 1024 )
+        ) );
+
+    return $uploder->get_input();
+}
+
+// у нас свой js помощник аплоадера авы
+if ( ! is_admin() ) {
+    add_action( 'init', 'tcl_requene_script', 10 );
+}
+function tcl_requene_script() {
+    global $user_ID;
+    if ( rcl_is_office( $user_ID ) ) {
+        remove_action( 'rcl_enqueue_scripts', 'rcl_support_avatar_uploader_scripts', 10 );
+
+        rcl_fileupload_scripts();
+        rcl_crop_scripts();
+    }
 }

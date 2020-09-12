@@ -5,22 +5,25 @@ function tcl_add_settings( $content ) {
     // кастомный блок саморекламы
     $inline_style = '
 <style>
-#options-theme-control::before {
+#theme-control-options-box::before {
     color: #5292b9;
     content: "THEME CONTROL";
     display: block;
     font-size: 20px;
     font-weight: bold;
-    margin: 5px 12px 25px;
+    margin: 9px 12px 18px;
 }
-#options-theme-control .rcl-custom-fields-box:nth-child(3) {
+#theme-control-options-box .options-group:nth-child(3) {
     background: linear-gradient(180deg, #f8ffd9 0%,#ffe3e3 100%);
     border-color: #b6dbd5;
     box-shadow: 6px 6px 12px -6px #aaa;
     margin-top: 18px;
 }
-#options-theme-control .rcl-custom-fields-box:nth-child(3) h3 {
-    color: #2c4e79;
+#theme-control-options-box .options-group:nth-child(3) > span {
+    color: #1a4479;
+    background: transparent;
+    font-size: 20px;
+    font-weight: bold;
 }
 </style>
 ';

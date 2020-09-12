@@ -1,6 +1,6 @@
 <?php
 /*  Шаблон дополнения Theme Control https://codeseller.ru/products/theme-control/
-  Версия шаблона v2.0
+  Версия шаблона v2.1
   Если вам нужно внести изменения в данный шаблон - скопируйте его в папку /wp-content/wp-recall/templates/
   - сделайте там в нем нужные вам изменения и он будет подключаться оттуда
   Подробно работа с шаблонами описана тут: https://codeseller.ru/?p=11632
@@ -21,7 +21,6 @@
         </div>
 
         <div class="tcl_right">
-            <span id="avatar-upload-progress"></span>
             <div id="tcl_cbox" class="tcl_bttn tcl_bttn_cnt">
                 <?php do_action( 'rcl_area_counters' ); ?>
             </div>

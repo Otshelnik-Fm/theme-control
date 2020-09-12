@@ -1,6 +1,6 @@
 .tcl_shev:focus,
 .tcl_shev:hover {
-    border-color: rgba(var(--tclPDark),.4) !important;
+    border-color: rgba(var(--rclRgbDark),.4) !important;
 }
 .tcl_bmenu,
 .rcl-bttn,

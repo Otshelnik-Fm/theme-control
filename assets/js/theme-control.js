@@ -1,3 +1,5 @@
+/* global RclUploaders */
+
 (function($){
     var LkMenu = $('#lk-menu');
     var TypMenu = $('#rcl-office');
@@ -84,5 +86,22 @@ function tclMenu(){
 
     RcLay.add('#tcl_extm').on('click', function () { tclClose(); });
 }
+
+
+// загрузка авы
+    setTimeout( function() {
+        RclUploaders.get( 'rcl_avatar' ).afterDone = function( e, data ) {
+            jQuery( '#tcl_ava img, #recallbar img.avatar' ).attr( 'srcset', '' )
+                .attr( 'src', data.result.uploads.src.thumbnail )
+                .load()
+                .animateCss( 'zoomIn' );
+
+            rcl_do_action( 'rcl_success_upload_cover', data );
+        };
+
+        RclUploaders.get( 'rcl_avatar' ).animateLoading = function( status ) {
+            status ? rcl_preloader_show( jQuery( '.tcl_right' ) ) : rcl_preloader_hide();
+        };
+    }, 600 );
 
 })(jQuery);

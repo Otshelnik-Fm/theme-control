@@ -70,8 +70,9 @@ add_filter( 'tcl_user_items', 'tcl_author_menu_item_ava', 12 );
 function tcl_author_menu_item_ava( $data ) {
     if ( ! rcl_exist_addon( 'user-info-tab' ) ) {
         $data .= '<div class="tcl_line rcl-tab-button tcl_load">';
-        $data .= '<label class="recall-button" for="userpicupload"><i class="rcli fa-download" aria-hidden="true"></i><span>' . __( 'Upload avatar', 'theme-control' ) . '</span></label>'
-            . '<input id="userpicupload" accept="image/*" name="userpicupload" type="file">';
+        $data .= '<label class="recall-button" for="rcl-uploader-input-rcl_avatar"><i class="rcli fa-download" aria-hidden="true"></i><span>' . __( 'Upload avatar', 'theme-control' ) . '</span></label>';
+
+        $data .= tcl_button_avatar_upload();
 
         $data .= '</div>';
     }

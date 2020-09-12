@@ -200,7 +200,7 @@ body .tcl_slide > .rcl-tab-button > * {
     position: relative;
 }
 .tcl_say span {
-    background: rgba(var(--tclP),.15);
+    background: rgba(var(--rclRgb),.15);
     overflow: hidden;
     padding: 6px 12px;
     text-overflow: ellipsis;
@@ -283,21 +283,21 @@ body .tcl_slide > .rcl-tab-button > * {
 
 /* реколл цвет элементов */
 .rcl_preloader i{
-    color:var(--tclPHex);
+    color:var(--rclHex);
 }
 .rcl-user-getails .status-user-rcl::before{
-    border-left-color:var(--tclPHex);
+    border-left-color:var(--rclHex);
 }
 .rows-list .status-user-rcl::before{
-    border-top-color:var(--tclPHex);
+    border-top-color:var(--rclHex);
 }
 .status-user-rcl{
-    border-color:var(--tclPHex);
+    border-color:var(--rclHex);
 }
 .rcl-field-input input[type="checkbox"]:checked + label.block-label::before,
 .rcl-field-input input[type="radio"]:checked + label.block-label::before{
-    background:var(--tclPHex);
-    border-color:var(--tclPHex);
+    background:var(--rclHex);
+    border-color:var(--rclHex);
 }
 /* END */
 
