@@ -1,6 +1,6 @@
 Name: Theme Control;
-Version: 2.2.1;
-Support Core: 16.23.12;
+Version: 2.2.2;
+Support Core: 16.23.13;
 Template: Theme Control;
 Description: Шаблон личного кабинета для совместной работы с дополнением User Info Tab;
 Author: Владимир Дружаев (Otshelnik-Fm);

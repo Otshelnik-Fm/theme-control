@@ -1,4 +1,4 @@
-/* global RclUploaders */
+/* global RclUploaders, Rcl */
 
 (function($){
     var LkMenu = $('#lk-menu');
@@ -93,7 +93,7 @@ if(Rcl.user_ID === Rcl.office_ID){
     setTimeout( function() {
         RclUploaders.get( 'rcl_avatar' ).afterDone = function( e, data ) {
             jQuery( '#tcl_ava img, #recallbar img.avatar' ).attr( 'srcset', '' )
-                .attr( 'src', data.result.uploads.src.thumbnail )
+                .attr( 'src', data.result.src.thumbnail )
                 .load()
                 .animateCss( 'zoomIn' );
 
