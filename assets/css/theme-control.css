@@ -279,6 +279,12 @@ body .tcl_slide > .rcl-tab-button > * {
 .rcl-tab-button {
     display: flex;
 }
+.tcl_bttn_act .rcl-bttn {
+    margin-bottom: 0 !important;
+}
+.tcl_bttn_act .rcl-bttn__text {
+    padding: 6px !important;
+}
 /* END */
 
 /* реколл цвет элементов */

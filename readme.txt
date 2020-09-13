@@ -161,6 +161,11 @@ function my_author_menu_item_add_publication( $data ) {
 
 == Changelog ==
 = 2020-09-13 =
+v2.2.3
+* поддержка работы с User info tab v2.9.0
+
+
+= 2020-09-13 =
 v2.2.2
 * поддержка WP-Recall 16.23.13 (в ядре были изменения в js загрузчике авы)
 
