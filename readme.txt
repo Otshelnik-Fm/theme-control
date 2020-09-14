@@ -160,6 +160,12 @@ function my_author_menu_item_add_publication( $data ) {
 
 
 == Changelog ==
+= 2020-09-15 =
+v2.2.4
+* поправил загрузку аватарки (скрипта) при включенном дополнении 
+<a href="https://codeseller.ru/products/liberty-tabs/" target="_blank">Liberty Tabs</a>
+
+
 = 2020-09-13 =
 v2.2.3
 * поддержка работы с User info tab v2.9.0

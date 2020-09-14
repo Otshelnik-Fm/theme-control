@@ -43,9 +43,14 @@ function tcl_load_resource() {
 
     global $user_ID;
 
+    if ( rcl_is_office( $user_ID ) ) {
+        rcl_enqueue_script( 'tcl_script_ava', rcl_addon_url( 'assets/js/theme-control-ava.min.js', __FILE__ ), false, true );
+    }
+
     if ( rcl_exist_addon( 'liberty-tabs' ) && rcl_is_office( $user_ID ) )
         return;
 
+    // скрипт кнопок
     rcl_enqueue_script( 'tcl_script', rcl_addon_url( 'assets/js/theme-control.min.js', __FILE__ ), false, true );
 }
 
