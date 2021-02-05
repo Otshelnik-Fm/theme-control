@@ -224,7 +224,7 @@ body .tcl_slide > .rcl-tab-button > * {
 .vertical-menu #lk-menu {
     flex-direction: column;
     margin: 0;
-    max-width: 150px;
+    max-width: 165px;
 }
 .horizontal-menu #lk-menu {
     align-items: center;
