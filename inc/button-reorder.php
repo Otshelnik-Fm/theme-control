@@ -61,7 +61,7 @@ function tcl_move_actions_button() {
 // кнопку "чёрный список" перенесем
 add_action( 'tcl_after_actions', 'tcl_blacklist_button', 200 );
 function tcl_blacklist_button() {
-    if ( ! tcl_is_other_lk() || rcl_exist_addon( 'friends-recall' ) )
+    if ( ! tcl_is_other_lk() )
         return;
 
     // автобот доп и это кабинет автобота
